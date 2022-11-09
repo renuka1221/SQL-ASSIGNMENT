@@ -58,3 +58,5 @@ Insert into product values(109, 'Refill cartridge', 350.00, 13);
 Insert into product values(110, 'Mouse', 250.00, 12);
 
 Answer: select * from product where pro_price between 200 and 600;
+
+
