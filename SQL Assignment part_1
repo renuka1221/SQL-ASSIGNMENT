@@ -1,4 +1,4 @@
-## Question: Write a query to display the columns in a specific order, such as order date, salesman ID, order number, and purchase amount for all orders.
+## Question 1: Write a query to display the columns in a specific order, such as order date, salesman ID, order number, and purchase amount for all orders.
 create table sales_order
 (
     ord_no int,
@@ -15,3 +15,7 @@ insert into sales_order values(7002, 65.26, '2012-10-05', 3002, 5001);
 Answer: SELECT ord_date, salesman_id, ord_no, purch_amt from sales_order;
 
 
+## Question 2: From the following table, write a SQL query to locate salespeople who live in the city
+of 'Paris'. Return salesperson's name, city.
+
+Answer: select name, city from sales_people where city = 'paris';
