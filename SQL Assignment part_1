@@ -18,4 +18,43 @@ Answer: SELECT ord_date, salesman_id, ord_no, purch_amt from sales_order;
 ## Question 2: From the following table, write a SQL query to locate salespeople who live in the city
 of 'Paris'. Return salesperson's name, city.
 
+create table sales_people
+(
+    salesman_id int,
+    name varchar(50),
+    city varchar(50),
+    commission float
+);
+insert into sales_people values(5001, 'James Hoog', 'New York', 0.15);
+insert into sales_people values(5002, 'Nail Knite', 'Paris', 0.13);
+insert into sales_people values(5005, 'Pit Alex', 'London', 0.11);
+insert into sales_people values(5006, 'Mc Lyon', 'Paris', 0.14);
+insert into sales_people values(5007, 'Paul Adam', 'Rome', 0.13);
+insert into sales_people values(5003, 'Lausen Hen', 'San Jose', 0.12);
+
 Answer: select name, city from sales_people where city = 'paris';
+
+## Question 3: From the following table, write a SQL query to select a range of products whose
+price is in the range Rs.200 to Rs.600. Begin and end values are included. Return
+pro_id, pro_name, pro_price, and pro_com.
+
+create table product
+(
+  pro_id int,
+  pro_name varchar(50),
+  pro_price float,
+  pro_com int
+);
+
+Insert into product values(101, 'Motherboard', 3200.00, 15);
+Insert into product values(102, 'Keyboard', 450.00, 16);
+Insert into product values(103, 'ZIP drive', 250.00, 14);
+Insert into product values(104, 'Speaker', 550.00, 16);
+Insert into product values(105, 'Monitor', 5000.00, 11);
+Insert into product values(106, 'DVD drive', 900.00, 12);
+Insert into product values(107, 'CD drive', 800.00, 12);
+Insert into product values(108, 'Printer', 2600.00, 13);
+Insert into product values(109, 'Refill cartridge', 350.00, 13);
+Insert into product values(110, 'Mouse', 250.00, 12);
+
+Answer: select * from product where pro_price between 200 and 600;
