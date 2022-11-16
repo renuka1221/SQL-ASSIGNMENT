@@ -1,6 +1,6 @@
 create database Assignment;
 use Assignment;
-create table city       FOR DATASET 1
+create table city      ( FOR DATASET 1)
 (
     Id int,
     Name varchar(17),
