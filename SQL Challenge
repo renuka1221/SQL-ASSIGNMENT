@@ -21,5 +21,10 @@ Insert into city values(4061, 'Fall River', 'USA', 'MassachusettS', 90555);
 
 
 ## 1Q: Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA.
-Answer: SELECT Countrycode, Population from city where Population > 100000 and Countrycode = 'USA';
+Answer: SELECT * from city WHERE population > 100000 and Countrycode = 'USA';
+
+## 2Q: Query the NAME field for all American cities in the CITY table with populations larger than 120000.
+The CountryCode for America is USA.
+Answer: SELECT Name, Population from city WHERE Population > 120000 and Countrycode = 'USA';
+
 
