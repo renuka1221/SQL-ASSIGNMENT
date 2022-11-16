@@ -79,9 +79,9 @@ Answer: SELECT City, State from stations;
 in any order, but exclude duplicates from the answer.
 Answer: SELECT City from stations WHERE MOD(Id, 2) = 0 order by City;
 
-
-
-
+## Q9. Find the difference between the total number of CITY entries in the table and the number of
+distinct CITY entries in the table.
+Answer: select count(City) - count (DISTINCT(City)) from stations;
 
 
 
