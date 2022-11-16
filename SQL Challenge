@@ -1,6 +1,6 @@
 create database Assignment;
 use Assignment;
-create table city
+create table city       FOR DATASET 1
 (
     Id int,
     Name varchar(17),
@@ -38,5 +38,39 @@ Answer: SELECT * from city WHERE Countrycode = JPN;
 
 ## Q6. Query the names of all the Japanese cities in the CITY table. The COUNTRYCODE for Japan is JPN
 Answer: SELECT Name from city WHERE Countrycode = JPN;
+
+
+
+create table stations           (FOR DATASET 2)
+(
+    Id int,
+    City varchar(30),
+    State varchar(10),
+    Lat_N int,
+    Long_W int
+);
+
+Insert into stations values(794, 'Kissee Mills', 'MO', 139, 73);
+Insert into stations values(824, 'Loma Mar', 'CA', 48, 130);
+Insert into stations values(603, 'Sandy Hook', 'CT', 72, 148);
+Insert into stations values(478, 'Tipton', 'IN', 33, 97);
+Insert into stations values(619, 'Arlington', 'CO', 75, 92);
+Insert into stations values(711, 'Turner', 'AR', 50, 101);
+Insert into stations values(839, 'Slidell', 'LA', 85, 151);
+Insert into stations values(411, 'Negreet', 'LA', 98, 105);
+Insert into stations values(588, 'Glencoe', 'KY', 46, 136);
+Insert into stations values(665, 'Chelsea', 'IA', 98, 59);
+Insert into stations values(342, 'Chignik Lagoon', 'AK', 103, 153);
+Insert into stations values(733, 'Pelahatchie', 'MS', 38, 28);
+Insert into stations values(441, 'Hanna City', 'IL', 50, 136);
+Insert into stations values(811, 'Dorrance', 'KS', 102, 121);
+Insert into stations values(698, 'Albany', 'CA', 49, 80);
+Insert into stations values(325, 'Monument', 'KS', 70, 141);
+Insert into stations values(414, 'Manchester', 'MD', 73, 37);
+Insert into stations values(113, 'Prescott', 'IA', 39, 65);
+Insert into stations values(971, 'Graettinger', 'IA', 94, 150);
+Insert into stations values(266, 'Cahone', 'CO', 116, 127);
+
+
 
 
