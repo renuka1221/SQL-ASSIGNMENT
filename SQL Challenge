@@ -83,6 +83,12 @@ Answer: SELECT City from stations WHERE MOD(Id, 2) = 0 order by City;
 distinct CITY entries in the table.
 Answer: select count(City) - count (DISTINCT(City)) from stations;
 
+## Q10. Query the two cities in STATION with the shortest and longest CITY names, as well as their
+  respective lengths (i.e.: number of characters in the name). If there is more than one smallest or
+   largest city, choose the one that comes first when ordered alphabetically.
+Answer: select city, length(City) from stations order by length(City) DESC,city limit 1;
+        select city, length(City) from stations order by length(City) ASC,city limit 1;
+
 
 
 
