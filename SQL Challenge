@@ -1,0 +1,25 @@
+create database Assignment;
+use Assignment;
+create table city
+(
+    Id int,
+    Name varchar(17),
+    Countrycode varchar(3),
+    District varchar(20),
+    Population int
+ );
+
+Insert into city values(6, 'ROTTERDAM', 'NLD', 'ZUID-HOLLAND', 593321);
+Insert into city values(3878, 'Scottsdale', 'USA', 'Arizona', 202705);
+Insert into city values(3965, 'Corona', 'USA', 'California', 124966);
+Insert into city values(3973, 'Concord', 'USA', 'California', 121780);
+Insert into city values(3977, 'Cedar Rapids', 'USA', 'Iowa', 120758);
+Insert into city values(3982, 'Coral Springs', 'USA', 'Florida', 117549);
+Insert into city values(4054, 'Fairfield', 'USA', 'California', 92256);
+Insert into city values(4058, 'Boulder', 'USA', 'Colorado', 91238);
+Insert into city values(4061, 'Fall River', 'USA', 'MassachusettS', 90555);
+
+
+## 1Q: Query all columns for all American cities in the CITY table with populations larger than 100000. The CountryCode for America is USA.
+Answer: SELECT Countrycode, Population from city where Population > 100000 and Countrycode = 'USA';
+
