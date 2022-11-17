@@ -116,7 +116,10 @@ Answer: SELECT DISTINCT City FROM stations
 ## Q15. Query the list of CITY names from STATION that either do not start with vowels or do not end
 with vowels. Your result cannot contain duplicates.
 Answer: SELECT City from stations
-         WHERE NOT REGEXP_LIKE(City, '^[aeiouAEIOU]') AND City NOT REGEXP '[aeiou]$';
+         WHERE NOT REGEXP_LIKE(City, '^[aeiouAEIOU]') OR City NOT REGEXP '[aeiou]$';
            
-##        
+## Q16. Query the list of CITY names from STATION that do not start with vowels and do not end with
+vowels. Your result cannot contain duplicates.
+Answer: SELECT City from stations
+         WHERE NOT REGEXP_LIKE(City, '^[aeiouAEIOU]') AND City NOT REGEXP '[aeiou]$';
            
