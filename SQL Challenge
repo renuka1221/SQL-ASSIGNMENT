@@ -96,4 +96,12 @@ Answer: SELECT DISTINCT City FROM stations
         WHERE REGEXP_LIKE(City, '^[aeiouAEIOU]')
         ORDER BY City;
 
-
+## Q12. Query the list of CITY names ending with vowels (a, e, i, o, u) from STATION. Your result cannot
+   contain duplicates.
+Answer: SELECT DISTINCT(City) FROM stations WHERE City LIKE '%a' OR City LIKE '%e' OR City LIKE '%i' OR City LIKE '%o' 
+           OR City LIKE '%u';
+           
+           
+           
+           
+           
