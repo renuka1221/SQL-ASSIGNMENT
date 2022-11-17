@@ -90,6 +90,10 @@ Answer: select city, length(City) from stations order by length(City) DESC,city 
         select city, length(City) from stations order by length(City) ASC,city limit 1;
 
 
-
+## Q11. Query the list of CITY names starting with vowels (i.e., a, e, i, o, or u) from STATION. Your result
+   cannot contain duplicates.
+Answer: SELECT DISTINCT City FROM stations 
+        WHERE REGEXP_LIKE(City, '^[aeiouAEIOU]')
+        ORDER BY City;
 
 
