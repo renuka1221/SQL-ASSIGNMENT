@@ -170,6 +170,31 @@ WHERE prod_id NOT IN (
 ) limit 1;
 
 
+Dataset 
+
+create table views
+(
+    article_id int,
+    author_id int,
+    viewer_id int,
+    view_date date
+) ;
+
+Insert into views values(1, 3, 5, '2019-08-01');
+Insert into views values(1, 3, 6, '2019-08-02');
+Insert into views values(2, 7, 7, '2019-08-01');
+Insert into views values(2, 7, 6, '2019-08-02');
+Insert into views values(4, 7, 1, '2019-07-22');
+Insert into views values(3, 4, 4, '2019-07-21');
+Insert into views values(3, 4, 4, '2019-07-21');
+
+Q18: Write an SQL query to find all the authors that viewed at least one of their own articles.
+Return the result table sorted by id in ascending order.
+Answer: select distinct author_id
+from views
+where author_id = viewer_id
+
+
 
 
 
