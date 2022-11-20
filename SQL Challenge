@@ -127,12 +127,12 @@ Answer: SELECT City from stations
  
  
  Dataset:  
- 
  create table product
 (
-   prod_id int,
+   prod_id int not null,
    prod_name varchar(20),
-   unit_price int
+   unit_price int,
+   primary key (prod_id)
 );
 
 create table sales
@@ -142,17 +142,41 @@ create table sales
     buyer_id int,
     sale_date date,
     quantity int,
-    price int
+    price int,
+    FOREIGN KEY (prod_id) REFERENCES product(prod_id)
+
 );
 
 insert into product values(1, 'S8', 1000);
 insert into product values(2, 'G4', 800);
 insert into product values(3, 'iPhone', 1400);
-select * from product;
 
 insert into sales values(1, 1, 1, '2019-01-21',2, 2000);
 insert into sales values(1, 2, 2, '2019-02-17',1, 800);
 insert into sales values(2, 2, 3, '2019-06-02',1, 800);
 insert into sales values(3, 3, 4, '2019-05-13',2, 2800);
-select * from sales;
+
+
+Q17: Write an SQL query that reports the products that were only sold in the first quarter of 2019. That is,
+between 2019-01-01 and 2019-03-31 inclusive.
+Answer: SELECT prod_id, prod_name
+FROM product
+WHERE prod_id NOT IN (
+    SELECT prod_id 
+    FROM sales 
+    WHERE 
+        sale_date between 2019-01-01 and 2019-03-31 
+    GROUP BY prod_id
+) limit 1;
+
+
+
+
+
+
+
+
+
+
+
            
