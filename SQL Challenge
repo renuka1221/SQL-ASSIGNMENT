@@ -213,16 +213,20 @@ Q20: Write an SQL query to find the ctr of each Ad. Round ctr to two decimal poi
  Return the result table ordered by ctr in descending order and by ad_id in ascending order in case of a
   tie.
 Answer: select ad_id,
-    (case when clicks+views = 0 then 0 else round(clicks/(clicks+views)*100, 2) end) as ctr
-from 
-    (select ad_id,
-        sum(case when action='Clicked' then 1 else 0 end) as clicks,
-        sum(case when action='Viewed' then 1 else 0 end) as views
-    from Ads
-    group by ad_id) as t
-order by ctr desc, ad_id asc;
+            (case when clicks+views = 0 then 0 else round(clicks/(clicks+views)*100, 2) end) as ctr
+        from 
+           (select ad_id,
+            sum(case when action='Clicked' then 1 else 0 end) as clicks,
+            sum(case when action='Viewed' then 1 else 0 end) as views
+        from Ads
+         group by ad_id) as t
+         order by ctr desc, ad_id asc;
 
-
+Q21: Write an SQL query to find the team size of each of the employees.
+Return result table in any order.
+Answer: select employee_id, count(team_id)
+           over(partition by team_id) as team_size
+        from Employee;
 
 
 
