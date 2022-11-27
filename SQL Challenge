@@ -320,9 +320,128 @@ Answer:select product_name, sum(unit) as unit
         
         
         
+ Q33: Write an SQL query to report the distance travelled by each user.
+Return the result table ordered by travelled_distance in descending order, if two or more users
+travelled the same distance, order them by their name in ascending order.
+Answer: select name, sum(ifnull(distance, 0)) as travelled_distance
+        from rides r
+          right join users u
+            on r.user_id = u.id
+          group by name
+               order by 2 desc,1 asc;
+               
+ Q34: Write an SQL query to show the unique ID of each user, If a user does not have a unique ID replace just
+show null.
+Answer: select unique_id, name
+        from Employees left join EmployeeUNI
+        on Employees.id = EmployeeUNI.id;
         
+Q35: Write an SQL query to find the id and the name of all students who are enrolled in departments that no
+longer exist.
+Answer: select s.id, s.name
+        from students s
+        left join departments d
+        on s.department_id = d.id
+         where d.id is null;
+         
+ Q36: Write an SQL query to report the number of calls and the total call duration between each pair of
+distinct persons (person1, person2) where person1 < person2.
+Answer: SELECT CASE WHEN from_id< to_id THEN from_id ELSE to_id END AS person1,
+               CASE WHEN from_id <to_id THEN to_id ELSE from_id END AS person2,
+                 COUNT(*) AS call_count,
+               SUM(duration) AS total_duration
+       FROM Calls 
+         GROUP BY person1, person2;
+         
+ Q37: Write an SQL query to find the average selling price for each product. average_price should be
+rounded to 2 decimal places.
+Answer: SELECT sl.item_code, 
+         ROUND(SUM(sl.sale_qty*ip.item_cost)/SUM(sl.sale_qty),2) AS average_selling_price
+        FROM sale sl
+         LEFT JOIN item_price ip 
+         ON sl.item_code = ip.item_code 
+         AND sl.sale_date BETWEEN ip.date_from AND ip.date_to
+           GROUP BY item_code;
+           
+ Q38: Write an SQL query to report the number of cubic feet of volume the inventory occupies in each
+warehouse.
+Answer: SELECT name AS warehouse_name,
+           SUM(units*Width*LENGTH*Height) AS volume
+        FROM Warehouse w
+         INNER JOIN Products p ON w.product_id = p.product_id
+           GROUP BY name
+           ORDER BY NULL;
+           
+ Q39: Write an SQL query to report the difference between the number of apples and oranges sold each day.
+Return the result table ordered by sale_date.
+Answer: select a.sale_date, a.sold_num - b.sold_num
+        from Sales a left join Sales b
+         on a.sale_date = b.sale_date
+        where a.fruit = 'apples' and b.fruit = 'oranges';
         
-        
+Q40: Write an SQL query to report the managers with at least five direct reports.
+Return the result table in any order.
+Answer: select 
+          a.name 
+        from employee a 
+        inner join employee b 
+        on (a.id = b.managerid) 
+          group by a.name 
+           having count(distinct b.id) >= 5;
+           
+ Q41: Write an SQL query to report the respective department name and number of students majoring in
+each department for all departments in the Department table (even ones with no current students).
+Answer: SELECT
+    d.dept_name,
+    COUNT(s.student_id) AS student_number
+  FROM department AS d 
+  LEFT JOIN student AS s
+   ON d.dept_id = s.dept_id
+      GROUP BY 1
+       ORDER BY 2 DESC, 1 ASC;
+       
+  Q42: Write an SQL query to report the customer ids from the Customer table that bought all the products in
+the Product table.
+Answer: select a.customer_id from
+         (select customer_id, count(distinct product_key) as num
+        from Customer
+           group by customer_id) a
+           where a.num = (select count(distinct product_key) from Product);
+           
+ Q43: Write an SQL query that reports the most experienced employees in each project. In case of a tie,
+report all employees with the maximum number of experience years.
+Answer: select * from
+          (select
+              p.project_id, e.employee_id,e.experience_years,
+          Rank() over (partition by project_id order by experience_years desc ) as rank_experience
+          from Project p join employee e
+          on p.employee_id = e.employee_id)
+       where rank_experience=1;
+       
+ Q44: Write an SQL query that reports the books that have sold less than 10 copies in the last year,
+excluding books that have been available for less than one month from today. Assume today is
+2019-06-23.
+Answer: select book_id, name
+        from Books
+        where book_id not in (select book_id
+               from Orders
+                where dispatch_date >= '2018-06-23' and dispatch_date <= '2019-06-22'
+               group by book_id
+                having sum(quantity) >= 10)
+       and available_from < '2019-05-23';
+       
+Q45: Write a SQL query to find the highest grade with its corresponding course for each student. In case of
+a tie, you should find the course with the smallest course_id.
+Answer: select student_id, min(course_id) as course_id, grade
+         from Enrollments
+       where (student_id, grade) in 
+             (select student_id, max(grade)
+          from Enrollments
+             group by student_id)
+           group by student_id
+          order by student_id asc;
+          
+ Q46:
         
         
         
