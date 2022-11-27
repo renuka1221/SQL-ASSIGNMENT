@@ -301,7 +301,13 @@ Answer: select unique_id, name
         from Employees left join EmployeeUNI
         on Employees.id = EmployeeUNI.id;
         
-        
+Q31: Write an SQL query to report the distance travelled by each user.
+Answer: select name, sum(ifnull(distance, 0)) as travelled_distance
+        from rides r
+        right join users u
+        on r.user_id = u.id
+        group by name
+        order by 2 desc,1 asc;
         
         
         
