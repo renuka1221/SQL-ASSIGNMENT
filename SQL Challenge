@@ -228,6 +228,25 @@ Answer: select employee_id, count(team_id)
            over(partition by team_id) as team_size
         from Employee;
 
+Q22: Write an SQL query to find the type of weather in each country for November 2019.
+Answer:  select country_name, case when avg(weather_state) <= 15 then "Cold"
+                          when avg(weather_state) >= 25 then "Hot"
+                          else "Warm" end as weather_type
+         from Countries inner join Weather
+            on Countries.country_id = Weather.country_id
+         where left(day, 7) = '2019-11'
+          group by country_name;
+
+
+Q23: Write an SQL query to find the average selling price for each product. average_price should be
+rounded to 2 decimal places.
+Answer: select UnitsSold.product_id, round(sum(units*price)/sum(units), 2) as average_price
+from UnitsSold 
+    inner join Prices on
+       UnitsSold.product_id = Prices.product_id
+Where UnitsSold.purchase_date between Prices.start_date and Prices.end_date
+group by UnitsSold.product_id;
+
 
 
 
