@@ -276,9 +276,17 @@ Answer: select o.customer_id, c.name
              sum(case when o.order_date like '2020-06%' then o.quantity*p.price else 0 end) >= 100
              and
              sum(case when o.order_date like '2020-07%' then o.quantity*p.price else 0 end) >= 100
-        )
+        );
 
 
-
+Q28: Write an SQL query to report the distinct titles of the kid-friendly movies streamed in June 2020.
+Return the result table in any order.
+Answer: SELECT DISTINCT title
+       FROM content ct
+       INNER JOIN TVProgram tv
+       ON ct.content_id = tv.content_id
+       WHERE content_type = 'Movies'
+       AND Kids_content = 'Y'
+       AND program_date BETWEEN '2020-06-01' AND '2020-06-30';
 
            
