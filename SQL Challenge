@@ -441,7 +441,79 @@ Answer: select student_id, min(course_id) as course_id, grade
            group by student_id
           order by student_id asc;
           
- Q46:
+ Q51: Write an SQL query to report the name, population, and area of the big countries.
+ Answer: SELECT
+    name, population, area
+    FROM
+    World
+      WHERE area > 3000000 OR population > 25000000;
+      
+  Q52: Write an SQL query to report the names of the customer that are not referred by the customer with id
+= 2.
+Answer: select name
+from customer
+where referee_id != 2 or referee_id is NULL;
+
+Q53: Write an SQL query to report all customers who never order anything. Return the result table in any order.
+Answer: select
+Name as Customers
+from Customers
+where Id not in( select CustomerId from Orders );
+
+Q54: Write an SQL query to ﬁnd the team size of each of the employees. Return result table in any order.
+Answer: select employee_id,
+count(team_id) over(partition by team_id) as team_size 
+from Employee
+order by employee_id;
+
+Q55: Write an SQL query to ﬁnd the countries where this company can invest. Return the result table in any order.
+Answer: select name country from Country c join 
+(select left(phone_number,3) code from Person p
+ join 
+(select distinct caller_id as id,call_duration from(
+select caller_id,callee_id,sum(duration) over(partition by caller_id  order by caller_id) 
+call_duration from Calls)a order by call_duration desc limit 1)a on 
+p.id = a.id)tmp where c.country_code = tmp.code;
+
+Q56: Write an SQL query to report the device that is ﬁrst logged in for each player. Return the result table in any order.
+Answer: select player_id,device_id  
+from(
+select player_id,device_id,event_date,
+row_number() over(partition by player_id order by event_date asc) as rw 
+from Activity) a
+where a.rw = 1;
+
+Q57: Write an SQL query to ﬁnd the customer_number for the customer who has placed the largest number of orders.
+Answer: select distinct customer_number from(
+select customer_number,count(*) orders_placed from Orders
+group by customer_number order by orders_placed desc limit 1)a;
+
+Q58: Write an SQL query to report all the consecutive available seats in the cinema. Return the result table ordered by seat_id in ascending order.
+Answer: SELECT
+     distinct t1.seat_id
+FROM cinema AS t1 JOIN cinema AS t2 on
+t1.seat_id <> t2.seat_id
+and  abs(t1.seat_id - t2.seat_id) = 1
+AND t1.free = 1 AND t2.free = 1
+ORDER BY 1 ;
+
+Q59: Write an SQL query to report the names of all the salespersons who did not have any orders related to the company with the name "RED".
+Answer: with cte AS
+(select sales_id from  Orders o left join  Company c on o.com_id = c.com_id
+where c.name ='RED')
+select name from SalesPerson where sales_id not IN
+(select * from cte);
+
+Q60: Write an SQL query to report for every three line segments whether they can form a triangle. Return the result table in any order.
+Answer: select x,y,z,
+case
+    when 
+            x+y>z and y+z>x and z+x> y then 'YES'
+    else 'NO'
+end as triangle
+from Triangle;
+
+
         
         
         
